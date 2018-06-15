@@ -8,7 +8,7 @@ const keys = require('./config/keys');
 
 //MODELS
 require('./models/User');
-
+require('./models/Survey');
 
 //PASSPORT
 require('./services/passport');
@@ -34,6 +34,7 @@ app.use(passport.session());
 //ROUTES
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
