@@ -20,23 +20,24 @@ class Mailer extends helper.Mail {
   formatAddresses(recipients) {
     return recipients.map(({ email }) => {
       return new helper.Email(email);
-    })
+    });
   }
 
   addClickTracking() {
-    const trackingSettings = new helper.trackingSettings();
-    const addClickTracking = new helper.ClickTracking(true, true);
+    const trackingSettings = new helper.TrackingSettings();
+    const clickTracking = new helper.ClickTracking(true, true);
 
-    trackingSettings.setClickTracking(ClickTracking);
+    trackingSettings.setClickTracking(clickTracking);
     this.addTrackingSettings(trackingSettings);
   }
 
   addRecipients() {
     const personalize = new helper.Personalization();
+
     this.recipients.forEach(recipient => {
       personalize.addTo(recipient);
-    })
-    this.AddPersonalization(personalize);
+    });
+    this.addPersonalization(personalize);
   }
 
   async send() {
@@ -44,12 +45,11 @@ class Mailer extends helper.Mail {
       method: 'POST',
       path: '/v3/mail/send',
       body: this.toJSON()
-    })
+    });
 
-  const response = this.sgApi.API(request);
-  return response;
+    const response = this.sgApi.API(request);
+    return response;
   }
 }
-
 
 module.exports = Mailer;
